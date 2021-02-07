@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://logic/paddle.gd" type="Script" id=1]
 [ext_resource path="res://paddle.png" type="Texture" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://logic/ball.gd" type="Script" id=4]
+[ext_resource path="res://pong.gd" type="Script" id=5]
 [ext_resource path="res://separator.png" type="Texture" id=6]
 [ext_resource path="res://logic/wall.gd" type="Script" id=7]
 [ext_resource path="res://logic/ceiling_floor.gd" type="Script" id=8]
@@ -11,7 +13,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 16 )
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=2]
 radius = 8.0
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -21,10 +23,12 @@ extents = Vector2( 10, 200 )
 extents = Vector2( 320, 10 )
 
 [node name="Pong" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Background" type="ColorRect" parent="."]
+margin_top = -0.793701
 margin_right = 640.0
-margin_bottom = 400.0
+margin_bottom = 399.206
 color = Color( 0.129412, 0.133333, 0.141176, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -57,7 +61,7 @@ position = Vector2( 320.5, 191.124 )
 script = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="Ball"]
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="Circle" type="Node2D" parent="Ball"]
 script = ExtResource( 9 )
@@ -69,6 +73,7 @@ texture = ExtResource( 6 )
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2( -10, 200 )
 script = ExtResource( 7 )
+left = true
 
 [node name="Collision" type="CollisionShape2D" parent="LeftWall"]
 shape = SubResource( 3 )
@@ -98,9 +103,14 @@ shape = SubResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 320, 200 )
 current = true
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
 [connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]
 [connection signal="area_entered" from="Right" to="Right" method="_on_area_entered"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_wall_area_entered"]
+[connection signal="out_of_bounds" from="LeftWall" to="." method="_on_LeftWall_out_of_bounds"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_on_wall_area_entered"]
+[connection signal="out_of_bounds" from="RightWall" to="." method="_on_RightWall_out_of_bounds"]
 [connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
+[connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
