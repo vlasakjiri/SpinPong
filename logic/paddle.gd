@@ -25,6 +25,10 @@ func _process(delta):
 func _on_area_entered(area):
 	if area.name != "Ball":
 		return
+	
+	var circle = area.get_node("Circle")
+	circle.lineColor = modulate
+	circle.update()
 	var normal =  Vector2(_ball_dir,0 )
 	area.direction = area.direction - (2 * normal * area.direction)*normal
 	var rot_inc = input
