@@ -23,7 +23,9 @@ func _physics_process(delta):
 		
 
 func reset():
-	direction = Vector2.LEFT
+	direction = [Vector2.LEFT, Vector2.RIGHT][randi() % 2]
+	$Circle.lineColor = Color(0,0,0)
+	$Circle.update()
 	rot_dir = 0.0
 	rotation = 0.0
 	position = _initial_pos

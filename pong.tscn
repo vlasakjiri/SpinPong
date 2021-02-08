@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://logic/paddle.gd" type="Script" id=1]
 [ext_resource path="res://paddle.png" type="Texture" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://logic/wall.gd" type="Script" id=7]
 [ext_resource path="res://logic/ceiling_floor.gd" type="Script" id=8]
 [ext_resource path="res://Circle.gd" type="Script" id=9]
+[ext_resource path="res://addons/kenney_interface_sounds/drop_003.wav" type="AudioStream" id=10]
+[ext_resource path="res://addons/kenney_interface_sounds/bong_001.wav" type="AudioStream" id=11]
+[ext_resource path="res://addons/kenney_interface_sounds/toggle_001.wav" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 16 )
@@ -105,6 +108,15 @@ shape = SubResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 320, 200 )
 current = true
+
+[node name="BongPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="BackPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="ScorePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
 [connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]
 [connection signal="area_entered" from="Right" to="Right" method="_on_area_entered"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_wall_area_entered"]

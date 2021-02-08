@@ -5,6 +5,6 @@ export (bool) var left
 
 func _on_wall_area_entered(area):
 	if area.name == "Ball":
-		#oops, ball went out of game place, reset
+		$"../ScorePlayer".play()
 		area.reset()
 		emit_signal("out_of_bounds")

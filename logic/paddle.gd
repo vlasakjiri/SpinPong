@@ -32,6 +32,7 @@ func _process(delta):
 func _on_area_entered(area):
 	if area.name != "Ball":
 		return
+	$"../BackPlayer".play()
 	
 	var circle = area.get_node("Circle")
 	circle.lineColor = modulate
