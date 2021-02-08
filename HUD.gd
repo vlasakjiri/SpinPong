@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-signal start_game
+signal onePlayer
+signal twoPlayers
 
 var leftScore = 0
 var rightScore = 0
@@ -30,7 +31,15 @@ func updateScore():
 	$Score.text = str(leftScore) + ":" + str(rightScore)
 
 func _on_Button_pressed():
-	emit_signal("start_game")
 	$Score.visible = true
 	$Title.visible = false
-	$StartButton.visible = false
+	$OnePlayerButton.visible = false
+	$TwoPlayersButton.visible = false
+	
+
+func _on_OnePlayerButton_pressed():
+	emit_signal("onePlayer")
+
+
+func _on_TwoPlayersButton_pressed():
+	emit_signal("twoPlayers")

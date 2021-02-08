@@ -100,11 +100,11 @@ _bounce_direction = -1
 [node name="Collision" type="CollisionShape2D" parent="Floor"]
 shape = SubResource( 4 )
 
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 320, 200 )
 current = true
-
-[node name="HUD" parent="." instance=ExtResource( 3 )]
 [connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]
 [connection signal="area_entered" from="Right" to="Right" method="_on_area_entered"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_wall_area_entered"]
@@ -113,4 +113,5 @@ current = true
 [connection signal="out_of_bounds" from="RightWall" to="." method="_on_RightWall_out_of_bounds"]
 [connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
-[connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
+[connection signal="onePlayer" from="HUD" to="." method="_on_HUD_onePlayer"]
+[connection signal="twoPlayers" from="HUD" to="." method="_on_HUD_twoPlayers"]

@@ -5,8 +5,10 @@ const MOVE_SPEED = 200
 var _ball_dir
 var _up
 var _down
-var input
+var input=0
 var processInput = true
+var useAi = false
+var AI 
 
 onready var _screen_size_y = get_viewport_rect().size.y
 
@@ -19,10 +21,12 @@ func _ready():
 
 func _process(delta):
 	# Move up and down based on input.
-	input = 0
+
 	if(processInput):
 		input = Input.get_action_strength(_down) - Input.get_action_strength(_up)
-		position.y = clamp(position.y + input * MOVE_SPEED * delta, 16, _screen_size_y - 16)
+	elif useAi:
+		input = AI.getMove()
+	position.y = clamp(position.y + input * MOVE_SPEED * delta, 16, _screen_size_y - 16)
 
 
 func _on_area_entered(area):

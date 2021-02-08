@@ -1,6 +1,6 @@
 extends Area2D
 
-const DEFAULT_SPEED = 170
+const DEFAULT_SPEED = 200
 const spin_impact = 0.0004
 const rotation_decay = 0.998
 
